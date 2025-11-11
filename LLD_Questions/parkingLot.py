@@ -17,21 +17,13 @@ Entities: ParkingSpot: the smallest entity, spot where the vehicle is parked. Ha
 """
 
 
-
-"""
-Interface for parking strategies
-"""
-class ParkingStrategy:
-    def park(self, floors:list['ParkingFloor'], vehicle_type:int)->str:
-        pass
-
 class Solution:
     def init(self, helper, parking: list[list[list[int]]]):
         """
         Initialize the parking lot with the given helper and parking structure.
         """
         self.vehicle_types = [2, 4]
-        self.helper = helper
+        # self.helper = helper
         self.park_manager = ParkingManager()
         self.search_manager = SearchManager()
         # helper.println(f"going to initialize floors {len(parking)}")
@@ -56,8 +48,9 @@ class Solution:
 class SearchManager:
     def __init__(self):
         self.cache={}
-    
-    def search(self, query)->str:
+
+    """ Search for a vehicle by its number or ticket ID."""
+    def search(self, query)->str: 
         return self.cache.get(query,"")
     
     def index(self, vehicle_number:str, ticket_id:str, spot_id:str)->None:
@@ -134,6 +127,16 @@ class ParkingSpot:
     def get_vehicle_type(self)->int:
         return self.vehicle_type
     
+"""
+Strategy Pattern for parking strategies"""
+"""
+Interface for parking strategies
+"""
+class ParkingStrategy:
+    def park(self, floors:list['ParkingFloor'], vehicle_type:int)->str:
+        pass
+
+
 """
 Manages and implements parking strategies
 """
